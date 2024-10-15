@@ -19,7 +19,7 @@ class Comics extends Component {
       {
         titulo: "Guardianes de la Galaxia",
         imagen:
-          "https://cdn.normacomics.com/media/catalog/product/cache/1/thumbnail/9df78eab33525d08d6e5fb8d27136e95/g/u/guardianes_galaxia_guadianes_infinito.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDO1BIzLkz03zVeBOK29ZjHs94vHilJOp4pQ&s",
         descripcion: "Yo soy Groot",
       },
       {
@@ -43,12 +43,48 @@ class Comics extends Component {
     ],
     favorito: null,
   };
+
+  seleccionarFavorito = (comicFavorito) => {
+    console.log("Seleccionar favorito");
+    this.setState({
+      favorito: comicFavorito,
+    });
+  };
+
+  eliminarComic = (index) => {
+    //eliminar algo de un array
+    //tenemos un metodo llamado splice que nos pide el index del elemento a eliminar del array y el numero de elementos a eliminar
+    console.log("Elminiar comic");
+    this.state.comics.splice(index, 1);
+    this.setState({
+      comics: this.state.comics,
+    });
+  };
+
   render() {
     return (
       <div>
         <h1>Comics</h1>
+        {this.state.favorito && (
+          <div style={{ backgroundColor: "yellow" }}>
+            <h2 style={{ color: "blue" }}>{this.state.favorito.titulo}</h2>
+            <img
+              src={this.state.favorito.imagen}
+              style={{ width: "100px", height: "150px" }}
+            ></img>
+          </div>
+        )}
+
         {this.state.comics.map((objetoComic, index) => {
-          return <Comic key={index} comic={objetoComic} />;
+          return (
+            <Comic
+              key={index}
+              index={index}
+              comic={objetoComic}
+              seleccionarFavorito={this.seleccionarFavorito}
+              eliminarComic={this.eliminarComic}
+            />
+          );
         })}
       </div>
     );

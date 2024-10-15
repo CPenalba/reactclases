@@ -10,6 +10,20 @@ class Comic extends Component {
           src={this.props.comic.imagen}
           style={{ width: "100px", height: "150px" }}
         />
+        <button
+          onClick={() => {
+            this.props.seleccionarFavorito(this.props.comic);
+          }}
+        >
+          Seleccionar favorito
+        </button>
+        <button
+          onClick={() => {
+            this.props.eliminarComic(this.props.index);
+          }}
+        >
+          Eliminar comic
+        </button>
       </div>
     );
   }
